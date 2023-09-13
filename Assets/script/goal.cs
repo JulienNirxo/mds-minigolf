@@ -1,40 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
-public class goal : MonoBehaviour
+public class Ball : MonoBehaviour
 {
-    Rigidbody m_Rigidbody;
-    public float m_Speed = 5f;
+    private Vector3 mousePressDownPos;
+    private Vector3 lastMousePos;
 
-    void Start()
+    private Rigidbody rb;
+    public CinemachineVirtualCamera virtualCamera; 
+
+    private void Start()
     {
-        //Fetch the Rigidbody from the GameObject with this script attached
-        m_Rigidbody = GetComponent<Rigidbody>();
-        FixedUpdate();
+        rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        //Store user input as a movement vector
-        Vector3 m_Input = new Vector3(-Input.GetAxis("Horizontal"), 0, -Input.GetAxis("Vertical"));
-        
-
-        //Apply the movement vector to the current position, which is
-        //multiplied by deltaTime and speed for a smooth MovePosition
-        m_Rigidbody.MovePosition(transform.position + m_Input * Time.deltaTime * m_Speed);
-
-        //add force after press space bar
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
-            m_Rigidbody.AddForce(Vector3.forward * -100);
+            mousePressDownPos = Input.mousePosition;
+            lastMousePos = mousePressDownPos;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            lastMousePos = Input.mousePosition;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Shoot(lastMousePos - mousePressDownPos);
+        }
+    }
+
+    // variables de forces
+    private float forceMultiplier = 1f;
+    private float maxForce = 500f; 
+
+    void Shoot(Vector3 Force)
+    {
+        // calcul de la force appliqué
+        Vector3 appliedForce = new Vector3(-Force.x, 0, -Force.y) * forceMultiplier;
+
+        // Force maximum
+        if (appliedForce.magnitude > maxForce)
+        {
+            appliedForce = appliedForce.normalized * maxForce;
         }
 
+        rb.AddForce(appliedForce);
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-
+        // Faites en sorte que la caméra Cinemachine suive la position de la balle à chaque frame.
+        if (virtualCamera != null)
+        {
+            virtualCamera.transform.position = transform.position;
+        }
     }
 }
