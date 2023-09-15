@@ -9,10 +9,13 @@ public class Ball : MonoBehaviour
     public GameObject objectToSpawn;
     private Vector3 mousePressDownPos;
     private Vector3 lastMousePos;
+    //call my script Counter
+    public Count counter;
     
 
     private Rigidbody rb;
     public CinemachineVirtualCamera virtualCamera; 
+    private float NumberOfShoot = 0;
 
     private void Start()
     {
@@ -58,6 +61,8 @@ public class Ball : MonoBehaviour
         }
 
         rb.AddForce(appliedForce);
+        NumberOfShoot++;
+        counter.DisplayTime(NumberOfShoot);
         
     }
 
