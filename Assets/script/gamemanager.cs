@@ -32,7 +32,15 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void EndGame(){
-        SceneManager.LoadScene("NiveauDeux");
+    public void EndGame(string newLevel){
+        SceneManager.LoadScene(newLevel);
+    }
+
+    [SerializeField] string[] level = {"NiveauUn", "NiveauDeux", "NiveauTrois", "Winner"};
+    int countLevel = 0;
+
+    public void GestionOfTerrain(){
+        countLevel++;
+        EndGame(level[countLevel]);
     }
 }

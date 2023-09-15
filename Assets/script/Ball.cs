@@ -41,6 +41,7 @@ public class Ball : MonoBehaviour
         if (transform.position.y < -10)
         {
             GameManager.Instance.Retry();
+            Debug.Log("Fall");
         }
         
     }
@@ -80,7 +81,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.tag == "goal")
         {
-            GameManager.Instance.EndGame();
+            GameManager.Instance.GestionOfTerrain();
         }
     }
 
