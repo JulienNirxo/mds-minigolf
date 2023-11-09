@@ -6,16 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
+    #region fields
     public GameObject objectToSpawn;
     private Vector3 mousePressDownPos;
     private Vector3 lastMousePos;
     //call my script Counter
     public Count counter;
+    public Score score;
+
     
 
     private Rigidbody rb;
     public CinemachineVirtualCamera virtualCamera; 
-    private float NumberOfShoot = 0;
+    public int _numberOfShoot = 0;
+
+    private float forceMultiplier = 1f;
+    private float maxForce = 1000f;
+    #endregion fields
+    
+    #region properties
+    public int NumberOfShoot{
+        get => _numberOfShoot;
+    }
+    #endregion properties
 
     private void Start()
     {
@@ -46,9 +59,7 @@ public class Ball : MonoBehaviour
         
     }
 
-    // variables de forces
-    private float forceMultiplier = 1f;
-    private float maxForce = 1000f; 
+     
 
     void Shoot(Vector3 Force)
     {
@@ -62,9 +73,13 @@ public class Ball : MonoBehaviour
         }
 
         rb.AddForce(appliedForce);
-        NumberOfShoot++;
-        counter.DisplayTime(NumberOfShoot);
-        
+        _numberOfShoot++;
+        counter.DisplayCount(NumberOfShoot);
+    }
+
+    public int GetNumberOfShoot()
+    {
+        return _numberOfShoot;
     }
 
     void LateUpdate()
@@ -77,12 +92,21 @@ public class Ball : MonoBehaviour
     }
 
     //si ma balle touche l'objet avec le tag goal je détruit la balle et je spawn un nouveau objectToSpawn
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision with: " + collision.gameObject.name); // Ajoutez cette ligne
         if (collision.gameObject.tag == "goal")
         {
-            GameManager.Instance.GestionOfTerrain();
+            Debug.Log("SHOOOT : " + _numberOfShoot);
+            
+            score.DetermineScoreMessage(_numberOfShoot);
+            InvokeRepeating("changeScene", 2.0f, 0.3f);
+            
         }
     }
 
+    void changeScene()
+    {
+        GameManager.Instance.GestionOfTerrain();
+    }
 }

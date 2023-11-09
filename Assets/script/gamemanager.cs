@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
-
+    
     public static GameManager Instance
     {
         get
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndGame(string newLevel){
+        //set timeout
         SceneManager.LoadScene(newLevel);
     }
 
@@ -42,5 +43,10 @@ public class GameManager : MonoBehaviour
     public void GestionOfTerrain(){
         countLevel++;
         EndGame(level[countLevel]);
+    }
+
+    public void DisplayScoreMessage()
+    {
+
     }
 }
