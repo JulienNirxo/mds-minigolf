@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Winner.unity
     guid: 588e348adbeee0b468a771666675af1a
+  - enabled: 1
+    path: Assets/Scenes/HighScore.unity
+    guid: b8e72e749311e06488d523d56faec7fe
   m_configObjects: {}

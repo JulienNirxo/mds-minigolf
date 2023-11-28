@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(newLevel);
     }
 
-    [SerializeField] string[] level = {"NiveauUn", "NiveauDeux", "NiveauTrois", "Winner"};
+    [SerializeField] string[] level = {"NiveauUn", "NiveauDeux", "NiveauTrois", "Winner", "HighScore"};
     int countLevel = 0;
 
     public void GestionOfTerrain(){
