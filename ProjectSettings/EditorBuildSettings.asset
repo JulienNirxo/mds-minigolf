@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/NiveauTrois.unity
     guid: 6645811b307ccda4e9210564870ef968
   - enabled: 1
+    path: Assets/Scenes/TrainingMenu.unity
+    guid: a1f1791d6ae45d04ab05f24d4c8015f5
+  - enabled: 1
     path: Assets/Scenes/Winner.unity
     guid: 588e348adbeee0b468a771666675af1a
   - enabled: 1

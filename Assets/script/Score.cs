@@ -21,25 +21,27 @@ public class Score : MonoBehaviour
     void Update()
     {
     }
+
+    //petit message
     public void DetermineScoreMessage(int numberOfShoots)
     {
         //set score
         _score = numberOfShoots;
         if (numberOfShoots <= 5)
         {
-            _scoreText.text = "INCROYABLE !";
+            _scoreText.text = "WOW !";
         }
         else if (numberOfShoots <= 7)
         {
-            _scoreText.text = "WOW !";
+            _scoreText.text = "Mouais...";
         }
         else if (numberOfShoots <= 9)
         {
-            _scoreText.text = "MOUAIS !";
+            _scoreText.text = "LOOSER !";
         }
         else
         {
-            _scoreText.text = "LOOSER !";
+            _scoreText.text = "Pitoyable !";
         }
 
         PlayerPrefs.SetInt("score", _score + PlayerPrefs.GetInt("score"));
@@ -52,14 +54,12 @@ public class Score : MonoBehaviour
         throw new NotImplementedException();
     }
 
+    //save score et nom du joueur
     public void SaveScore()
     {
         string playerName = _nameInput.text;
 
-        //get score
         int score = PlayerPrefs.GetInt("score");
-
-        // Compte le nombre de joueurs déjà enregistrés pour déterminer l'index du joueur actuel
         int count = 1;
         while (PlayerPrefs.HasKey("Player_" + count))
         {

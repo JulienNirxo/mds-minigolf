@@ -3,16 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    public string gameSceneName = "NiveauUn"; // Le nom de la scène du jeu
-
-    public void StartGame()
+    public void Niveau(string niveau)
     {
-        SceneManager.LoadScene(gameSceneName);
+        PlayerPrefs.SetString("typeJeu", "Training");
+        PlayerPrefs.Save();
+        SceneManager.LoadScene(niveau);
     }
 
-    public void Retry()
+    public void StartTournois()
     {
-        SceneManager.LoadScene("MainMenu");
+        PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetString("typeJeu", "Tournoi");
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("niveauUn");
     }
 
     public void QuitGame()

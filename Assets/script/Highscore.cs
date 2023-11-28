@@ -13,10 +13,13 @@ public class Highscore : MonoBehaviour
         DisplayHighscores();
     }
 
+    //tableau des highscores
     void DisplayHighscores()
     {
-        string display = "Highscores:\n";
+        //PlayerPrefs.DeleteAll();
+        string display = "";
         string[,] listOfPlayers = new string[100, 100];
+        //string 
 
         int count = 1;
         while (PlayerPrefs.HasKey("Player_" + count))
@@ -32,17 +35,29 @@ public class Highscore : MonoBehaviour
         }
 
         // Sort the list by score and display the top 10
-        //Array.Sort(listOfPlayers);
-        //Array.Reverse(listOfPlayers);
-
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < count - 1; i++)
         {
-            display += listOfPlayers[i,0] + " -> " + listOfPlayers[i,1] + "\n";
+            for (int j = i + 1; j < count - 1; j++)
+            {
+                if (Convert.ToInt32(listOfPlayers[i, 1]) > Convert.ToInt32(listOfPlayers[j, 1]))
+                {
+                    string temp = listOfPlayers[i, 1];
+                    listOfPlayers[i, 1] = listOfPlayers[j, 1];
+                    listOfPlayers[j, 1] = temp;
+
+                    temp = listOfPlayers[i, 0];
+                    listOfPlayers[i, 0] = listOfPlayers[j, 0];
+                    listOfPlayers[j, 0] = temp;
+                }
+            }
         }
 
-        Debug.Log(display);
 
-        // Affiche les highscores dans ton Text UI
+        for (int i = 0; i < 5; i++)
+        {
+            display += listOfPlayers[i,0] + " : " + listOfPlayers[i,1] + "\n";
+        }
+
         highscoreText.text = display;
     }
 }

@@ -41,8 +41,13 @@ public class GameManager : MonoBehaviour
     int countLevel = 0;
 
     public void GestionOfTerrain(){
-        countLevel++;
-        EndGame(level[countLevel]);
+        if(PlayerPrefs.GetString("typeJeu") == "Tournoi"){
+            countLevel++;
+            EndGame(level[countLevel]);
+        }else{
+            countLevel = 0;
+        }
+        
     }
 
     public void DisplayScoreMessage()
