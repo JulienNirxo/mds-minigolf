@@ -34,8 +34,16 @@ public class GameManager : MonoBehaviour
     }
 
     //faire apparaitre la balle et le timer
-    public void StartGame(){
+    public void Start(){
         countLevel = 0;
+        //pauseMenu.SetActive(false);
+    }
+
+    void Update() {
+        // Vérifiez si le joueur appuie sur un certain bouton pour activer/désactiver la pause
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            //TogglePause();
+        }
     }
 
     public void EndGame(string newLevel){
