@@ -29,8 +29,6 @@ public class Highscore : MonoBehaviour
 
             listOfPlayers[count - 1, 0] = player.playerName.ToString();
             listOfPlayers[count - 1, 1] = player.score.ToString();
-
-
             count++;
         }
 

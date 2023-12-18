@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour
     
 
     private Rigidbody rb;
+    private GameManager gameManager;
     public CinemachineVirtualCamera virtualCamera; 
     public int _numberOfShoot = 0;
 
@@ -33,6 +34,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
     }
 
     private void Update()
@@ -53,7 +55,8 @@ public class Ball : MonoBehaviour
 
         if (transform.position.y < -10)
         {
-            GameManager.Instance.Retry();
+            gameManager = FindObjectOfType<GameManager>();
+            gameManager.Retry();
             Debug.Log("Fall");
         }
         
@@ -107,6 +110,7 @@ public class Ball : MonoBehaviour
 
     void changeScene()
     {
-        GameManager.Instance.GestionOfTerrain();
+        gameManager = FindObjectOfType<GameManager>();
+        gameManager.GestionOfTerrain();
     }
 }

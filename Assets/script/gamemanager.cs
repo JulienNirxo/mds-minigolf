@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
             EndGame(level[countLevel]);
         }else{
             countLevel = 0;
+            EndGame("TrainingMenu");
         }
         
     }
