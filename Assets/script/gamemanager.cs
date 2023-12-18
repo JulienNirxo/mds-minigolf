@@ -22,14 +22,20 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    int countLevel = 0;
 
     public void Retry(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if(PlayerPrefs.GetString("typeJeu") == "Tournoi"){
+            countLevel = 0;
+            SceneManager.LoadScene("NiveauUn");
+        }else{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     //faire apparaitre la balle et le timer
     public void StartGame(){
-        
+        countLevel = 0;
     }
 
     public void EndGame(string newLevel){
@@ -38,21 +44,21 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] string[] level = {"NiveauUn", "NiveauDeux", "NiveauTrois", "Winner", "HighScore"};
-    int countLevel = 0;
+    
 
     public void GestionOfTerrain(){
         if(PlayerPrefs.GetString("typeJeu") == "Tournoi"){
-            countLevel++;
-            EndGame(level[countLevel]);
+            if(countLevel < level.Length - 1){
+                countLevel++;
+                EndGame(level[countLevel]);
+            }else{
+                countLevel = 1;
+                EndGame(level[countLevel]);
+            }
         }else{
             countLevel = 0;
             EndGame("TrainingMenu");
         }
         
-    }
-
-    public void DisplayScoreMessage()
-    {
-
     }
 }

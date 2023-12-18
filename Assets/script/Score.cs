@@ -46,6 +46,9 @@ public class Score : MonoBehaviour
 
         PlayerPrefs.SetInt("score", _score + PlayerPrefs.GetInt("score"));
         PlayerPrefs.Save();
+
+
+        //PlayerPrefs.DeleteAll();
     }
 
 

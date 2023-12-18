@@ -55,6 +55,7 @@ public class Ball : MonoBehaviour
 
         if (transform.position.y < -10)
         {
+            PlayerPrefs.SetInt("score", 0);
             gameManager = FindObjectOfType<GameManager>();
             gameManager.Retry();
             Debug.Log("Fall");
